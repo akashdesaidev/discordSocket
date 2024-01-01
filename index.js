@@ -1,5 +1,5 @@
 const express = require("express");
-require('dotenv').config(); 
+require("dotenv").config();
 const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
@@ -17,7 +17,8 @@ const io = new Server(server, {
     allowedHeaders: "Authorization",
   },
 });
-const PORT =process.env.PORT||3001;
+const PORT = process.env.PORT || 3001;
+
 const activeUsers = new Set();
 
 io.on("connection", (socket) => {
@@ -42,6 +43,9 @@ io.on("connection", (socket) => {
   });
 });
 
+app.get("/", (req, res) => {
+  res.json("hello");
+});
 server.listen(PORT, () => {
   console.log(`Socket.IO server listening on ${PORT}`);
 });
